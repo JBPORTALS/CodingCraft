@@ -14,4 +14,4 @@
    Create `.env` file in root directory and define that variable
    `DATABASE_URL=[YOUR_POSTGRES_DATABASE_URL]`
 
-4.
+4. Helo everyone
