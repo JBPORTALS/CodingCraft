@@ -20,3 +20,13 @@ export const PatchOrderStatus = z.object({
     invalid_type_error: "Invalid Status Property Value",
   }),
 });
+
+export const CartAddSchema = z.object({
+  userId: z.string().min(1, "`userId` is missing"),
+  productId: z.string().min(1, "`productId` is missing"),
+  quantity: z.number().min(1, "Invalid quantity").optional(),
+});
+
+export const CartGetAllSchema = z.object({
+  userId: z.string().min(1, "`userId` is missing"),
+});

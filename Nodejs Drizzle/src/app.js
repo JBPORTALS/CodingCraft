@@ -1,14 +1,16 @@
 import express from "express";
 import { db } from "../db/index.js";
-import { orders, products, users } from "../db/schema.js";
+import { cart, orders, products, users } from "../db/schema.js";
 import dotenv from "dotenv";
 import {
+  CartAddSchema,
+  CartGetAllSchema,
   GetAllOrderSchema,
   PatchOrderStatus,
   PlaceOrderSchema,
   UserPostSchema,
 } from "./validatator/zod-schemas.js";
-import { eq } from "drizzle-orm";
+import { eq, sql, sum } from "drizzle-orm";
 
 const app = express();
 const PORT = 8000;
@@ -106,6 +108,78 @@ app.get("/order.getAll", async (req, res) => {
     });
   }
 });
+
+app.get("/cart.get", async (req, res) => {
+  try {
+    const { userId } = CartGetAllSchema.parse(req.body);
+
+    //calculate total cart items price
+    const totalCartDetails = await db
+      .select({
+        totalPrice: sql`sum(cast(${products.price}*${cart.quantity} as float))`,
+      })
+      .from(cart)
+      .innerJoin(products, eq(cart.productId, products.id))
+      .where(eq(cart.userId, userId))
+      .groupBy(cart.userId);
+
+    const cartDetails = await db
+      .select({
+        id: cart.id,
+        productId: products.id,
+        name: products.name,
+        description: products.description,
+        price: products.price,
+        quantity: cart.quantity,
+        totalPrice: sql`cast(${products.price}*${cart.quantity} as float)`,
+      })
+      .from(cart)
+      .innerJoin(products, eq(cart.productId, products.id))
+      .where(eq(cart.userId, userId));
+
+    const formatedResult = {
+      totalCartPrice: totalCartDetails.at(0).totalPrice,
+      allProducts: cartDetails,
+    };
+
+    res.status(201).json(formatedResult);
+  } catch (e) {
+    res.status(400).json({
+      message: "Bad Request",
+      extra: e,
+    });
+  }
+});
+
+app.post("/cart.add", async (req, res) => {
+  try {
+    const { productId, userId, quantity } = CartAddSchema.parse(req.body);
+
+    const orderDetails = await db
+      .insert(cart)
+      .values({
+        productId,
+        userId,
+        quantity,
+      })
+      .onConflictDoNothing({
+        target: [cart.productId, cart.userId],
+      })
+      .returning();
+
+    res.status(201).json(orderDetails);
+  } catch (e) {
+    console.log(e);
+    res.status(400).json({
+      message: "Bad Request",
+      extra: e,
+    });
+  }
+});
+
+app.get("/cart.remove", async (req, res) => {});
+
+app.get("/cart.updateItem", async (req, res) => {});
 
 app.listen(PORT, () => {
   console.log(`Running on http://localhost:${PORT}`);

@@ -5,6 +5,7 @@ import {
   timestamp,
   pgEnum,
   decimal,
+  integer,
 } from "drizzle-orm/pg-core";
 
 export const statusEnum = pgEnum("status", [
@@ -25,6 +26,7 @@ export const cart = pgTable("cart", {
   id: uuid("id").primaryKey().defaultRandom(),
   productId: uuid("productId").references(() => products.id), //foriegn key
   userId: uuid("userId").references(() => users.id), //foriegn key
+  quantity: integer("quantity").notNull().default(1),
 });
 
 export const products = pgTable("products", {
