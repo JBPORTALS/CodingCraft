@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: black;
+}
+
+#gameContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+canvas {
+  display: block;
+  width: 100%; /* Ensure canvas fills its parent container */
+  height: 100%;
+}
+
+#score {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  font-size: 20px;
+}
+
+/* Additional styling for the player's spaceship */
+#player {
+  background-image: url('path/to/your/texture/image.png');
+  background-size: cover;
+}
