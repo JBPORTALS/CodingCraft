@@ -1,18 +1,19 @@
-import { useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./_components/Home";
+import About from "./_components/About";
+import Navbar from "./_components/Navbar";
 
 function App() {
-  let [counter, setCounter] = useState<number>(0);
-
   return (
-    <div className="flex justify-center items-center bg-gray-900 h-full w-full">
-      <button
-        onClick={() => {
-          setCounter(counter + 1);
-        }}
-        className="text-white rounded-md hover:border-white hover:border px-6 py-3 bg-gray-800 hover:bg-gray-700"
-      >
-        Count: {counter}
-      </button>
+    <div className="flex flex-col text-white bg-gray-900 h-full w-full">
+      <BrowserRouter>
+        {/* Navbar Links can get the context */}
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
