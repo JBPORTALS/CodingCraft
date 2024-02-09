@@ -262,7 +262,7 @@ function find<T>(arr: T[], item: T) {
   return arr.includes(item);
 }
 
-const res = find(["Joe", "Jhon"] as const, "Jhon");
+const res = find(["Joe", "Jhon"], "Jhon");
 
 //Utility types
 interface EmployeeT {
@@ -324,3 +324,14 @@ type UppercaseType = Uppercase<keyof GetUsersReturnType>;
 type LowercaseType = Lowercase<keyof GetUsersReturnType>;
 type CapitalizeType = Capitalize<keyof GetUsersReturnType>;
 type UnCapitalizeType = Uncapitalize<keyof GetUsersReturnType>;
+
+type Flattern<T> = T extends any[] ? [keyof T] : T;
+
+type names = Flattern<readonly ["Helo", "Bye"]>;
+type namesUnion = keyof names;
+
+const SIZES = ["LG", "KG"];
+
+type ValueOf<T extends readonly string[] | number[]> = T[number];
+
+type SizeValue = ValueOf<[1, 2, 3]>;
