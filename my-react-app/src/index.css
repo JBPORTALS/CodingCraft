@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 body #root {
-  @apply h-screen w-screen;
+  @apply h-screen w-screen overflow-x-hidden bg-neutral-50;
 }
