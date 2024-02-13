@@ -1,22 +1,20 @@
+import { useContext } from "react";
 import Product from "./Product";
+import { ProductsCtx } from "../store/products.ctx";
+import ProductSkeleton from "./Product.Skeleton";
 
-export interface HomeProps {
-  setCount: (count: number) => void;
-  count: number;
-}
-export default function Home({ setCount, count }: HomeProps) {
+export default function Home() {
+  const { products } = useContext(ProductsCtx);
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 py-5 h-full">
-      <Product {...{ setCount, count }} />
-      <Product {...{ setCount, count }} />
-      <Product {...{ setCount, count }} />
-      <Product {...{ setCount, count }} />
-      <Product {...{ setCount, count }} />
-      <Product {...{ setCount, count }} />
-      <Product {...{ setCount, count }} />
-      <Product {...{ setCount, count }} />
-      <Product {...{ setCount, count }} />
-      <Product {...{ setCount, count }} />
+    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-5 py-5 h-full">
+      {products.length === 0
+        ? Array(8)
+            .fill(10)
+            .map((_, index) => <ProductSkeleton key={index} />)
+        : products.map((product) => (
+            <Product key={product.id} data={product} />
+          ))}
     </div>
   );
 }
