@@ -1,6 +1,7 @@
 import { ShoppingCart } from "lucide-react";
 import { useContext } from "react";
 import { ProductType, ProductsCtx } from "../store/products.ctx";
+import Button from "./Button";
 
 export interface ProductProps {
   data: ProductType;
@@ -20,20 +21,17 @@ export default function Product({ data }: ProductProps) {
         <div className="flex flex-col gap-2">
           <h2 className="text-base font-medium">{data.title}</h2>
           <p className="text-sm text-neutral-500">
-            {data.description.slice(0, 160).concat("...")}
+            {data.description.slice(0, 60).concat("...")}
           </p>
         </div>
         <div className="flex items-baseline justify-between pt-4 px-2">
           <span className="text-xl font-extrabold text-purple-900">
             {data.price} ₹
           </span>
-          <button
-            onClick={() => addItemToCart(data)}
-            className="bg-neutral-950 text-sm flex items-center gap-2 justify-center hover:bg-neutral-800 text-neutral-100 px-4 py-2 rounded-md"
-          >
+          <Button variant={"outline"} onClick={() => addItemToCart(data)}>
             <ShoppingCart />
             Add to Cart
-          </button>
+          </Button>
         </div>
       </div>
     </div>
