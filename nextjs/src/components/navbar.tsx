@@ -1,15 +1,16 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ModeToggle } from "./theme-toggle";
 
 export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="h-14 items-center w-full border-b border-b-slate-600 flex justify-between px-8">
-      <h1 className="text-xl font-bold text-white">Acme</h1>
+    <nav className="h-14 items-center sticky left-0 top-0 right-0 z-50 bg-background/65 backdrop-blur-lg w-full border-b flex justify-between px-8">
+      <h1 className="text-xl font-bold">Acme</h1>
       <div className="flex gap-5">
-        <Link href={"/"}>
+        {/* <Link href={"/"}>
           <span
             className={
               pathname === "/" ? "underline underline-offset-4" : "no-underline"
@@ -50,7 +51,8 @@ export default function Navbar() {
           >
             Contact
           </span>
-        </Link>
+        </Link> */}
+        <ModeToggle />
       </div>
     </nav>
   );
