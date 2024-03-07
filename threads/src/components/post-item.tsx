@@ -1,7 +1,8 @@
 import { HeartIcon, MessageCircleIcon, MoreHorizontalIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import moment from "moment";
 
-export default function PostItem() {
+export default function PostItem({ post }: { post: any }) {
   return (
     <div className="flex flex-col w-full">
       <header className="flex justify-between">
@@ -13,17 +14,14 @@ export default function PostItem() {
           <h3 className="font-medium text-sm">Shadcn</h3>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-sm text-muted-foreground">12h</span>
+          <span className="text-sm text-muted-foreground">
+            {moment(post.createAt).fromNow()}
+          </span>
           <MoreHorizontalIcon />
         </div>
       </header>
       <div className="p-5">
-        <article>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet hic
-          libero expedita laborum. Eaque obcaecati, laudantium perferendis,
-          optio nam nulla velit recusandae necessitatibus numquam placeat
-          adipisci quaerat quas ad veniam?
-        </article>
+        <article>{post.content}</article>
       </div>
       <footer className="flex items-center gap-3 px-5">
         <HeartIcon /> <MessageCircleIcon />
