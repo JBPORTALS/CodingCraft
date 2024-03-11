@@ -6,7 +6,7 @@ export default function RootLoadingPage() {
       {Array(6)
         .fill(0)
         .map((_, index) => (
-          <Skeleton key={index} className="w-full h-96" />
+          <Skeleton key={index} className="w-full h-40" />
         ))}
     </div>
   );

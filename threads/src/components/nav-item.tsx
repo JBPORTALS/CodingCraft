@@ -2,7 +2,7 @@ import { cva, VariantProps } from "class-variance-authority";
 import React, { HTMLAttributes } from "react";
 
 const navItemVariants = cva(
-  "flex items-center justify-start gap-3 px-3 py-2 rounded-md",
+  "flex items-center justify-start gap-3 px-3 py-2 rounded-md text-sm",
   {
     variants: {
       isActive: {
