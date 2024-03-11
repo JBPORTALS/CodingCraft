@@ -21,13 +21,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={"h-screen w-screen grid grid-cols-12 overflow-hidden"}
-        style={poppins.style}
-      >
-        <Sidebar />
+      <body className={"h-screen w-screen"} style={poppins.style}>
         {children}
-        <RightBar />
       </body>
     </html>
   );

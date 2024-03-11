@@ -21,10 +21,12 @@ export default async function Home() {
     await db.insert(posts).values({ content });
     // revalidate cache
     revalidatePath("/");
+
+    formData.set("content", "");
   }
 
   return (
-    <main className="flex gap-8 col-span-8 min-h-screen flex-col items-center px-40 py-10 overflow-y-auto">
+    <div className="flex gap-8  min-h-screen flex-col items-center px-40 py-10 overflow-y-auto">
       <div className="flex items-start w-full gap-3 py-6 border-b">
         <div className="flex gap-2 items-center">
           <Avatar>
@@ -40,7 +42,7 @@ export default async function Home() {
             placeholder="Start a new thread..."
           />
           <div className="flex justify-end">
-            <Button type="submit" size={"sm"} variant={"ghost"}>
+            <Button type="submit" size={"lg"}>
               Post
             </Button>
           </div>
@@ -48,8 +50,8 @@ export default async function Home() {
       </div>
 
       {allPosts.map((post) => (
-        <PostItem {...{ post }} />
+        <PostItem key={post.id} {...{ post }} />
       ))}
-    </main>
+    </div>
   );
 }
