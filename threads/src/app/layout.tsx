@@ -17,14 +17,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <html lang="en">
       <body className={"h-screen w-screen"} style={poppins.style}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
+          {modal}
         </ThemeProvider>
       </body>
     </html>

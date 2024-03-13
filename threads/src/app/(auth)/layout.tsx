@@ -14,7 +14,7 @@ export default function AuthLayout({
           which connects you with your favourite people.
         </span>
       </main>
-      <div className="col-span-8 flex-1 px-16">{children}</div>
+      <div className="flex-1 px-16">{children}</div>
     </div>
   );
 }

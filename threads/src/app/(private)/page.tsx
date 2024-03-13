@@ -6,6 +6,7 @@ import { db } from "@/db";
 import { posts } from "@/db/schema";
 import { desc } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
+import Link from "next/link";
 
 export default async function Home() {
   const allPosts = await db.select().from(posts).orderBy(desc(posts.createAt));
@@ -26,8 +27,8 @@ export default async function Home() {
   }
 
   return (
-    <div className="flex gap-8  min-h-screen flex-col items-center px-40 py-10 overflow-y-auto">
-      <div className="flex items-start w-full gap-3 py-6 border-b">
+    <div className="flex gap-8  min-h-screen flex-col items-center px-8 py-10 overflow-y-auto">
+      {/* <div className="flex items-start w-full gap-3 py-6 border-b">
         <div className="flex gap-2 items-center">
           <Avatar>
             <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
@@ -47,7 +48,7 @@ export default async function Home() {
             </Button>
           </div>
         </form>
-      </div>
+      </div> */}
 
       {allPosts.map((post) => (
         <PostItem key={post.id} {...{ post }} />

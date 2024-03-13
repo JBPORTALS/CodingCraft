@@ -1,6 +1,6 @@
 import React from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Button } from "./ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { revalidatePath } from "next/cache";
 
 async function fetchUsersProfile() {
@@ -15,7 +15,7 @@ async function fetchUsersProfile() {
   }
 }
 
-export default async function RightBar() {
+export default async function RightBarSlot() {
   const profiles = await fetchUsersProfile();
 
   revalidatePath("/");
