@@ -88,13 +88,6 @@ export default function SigninModal() {
                 </FormItem>
               )}
             />
-
-            <span className="mt-6">
-              You don't have an account?
-              <Link href={"/sign-up"}>
-                <Button variant={"link"}>Create Account</Button>
-              </Link>
-            </span>
           </form>
         </Form>
         <DialogFooter>

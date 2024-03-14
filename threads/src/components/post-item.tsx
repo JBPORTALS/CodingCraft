@@ -14,7 +14,7 @@ export default function PostItem({ post }: { post: any }) {
           <h3 className="font-medium text-sm">Shadcn</h3>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-sm text-muted-foreground">
+          <span className="text-xs text-muted-foreground">
             {moment(post.createAt).fromNow()}
           </span>
           <MoreHorizontalIcon />

@@ -107,12 +107,6 @@ export default function SigninModal() {
                 </FormItem>
               )}
             />
-            <span className="mt-6">
-              You already have an account?
-              <Link href={"/sign-in"}>
-                <Button variant={"link"}>Get Signin</Button>
-              </Link>
-            </span>
           </form>
         </Form>
         <DialogFooter>
