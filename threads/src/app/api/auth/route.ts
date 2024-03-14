@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     .where(eq(users.email, values.email));
 
   if (isExistedUser.length > 0)
-    throw new Response("Email already existed", { status: 409 });
+    return Response.json({ message: "Email already exists" }, { status: 402 });
 
   // Generate salt and hashing password
 

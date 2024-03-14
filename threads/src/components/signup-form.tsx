@@ -14,9 +14,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { db } from "@/db";
-import { users } from "@/db/schema";
 import { Loader2Icon } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 export const SignupformSchema = z.object({
   username: z
@@ -36,11 +35,18 @@ export default function SignUpForm() {
     },
   });
 
+  const { toast } = useToast();
+
   async function onSubmit(values: z.infer<typeof SignupformSchema>) {
     const response = await fetch("http://localhost:3000/api/auth", {
       method: "POST",
       body: JSON.stringify(values),
     });
+
+    const data = await response.json();
+
+    if (response.status !== 200)
+      toast({ title: data.message, variant: "destructive" });
   }
 
   return (

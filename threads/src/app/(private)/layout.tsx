@@ -24,7 +24,9 @@ export default function PrivateRootLayout({
         </div>
         {children}
       </div>
-      {rightbar}
+      <div className="h-full w-full border-l col-span-3 overflow-hidden">
+        {rightbar}
+      </div>
 
       {/* <Suspense fallback={<ProfileSkeleton />}>
         <RightBar />
